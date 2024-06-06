@@ -22,7 +22,7 @@ export class  InitialMigration implements MigrationInterface {
                 id uuid DEFAULT uuid_generate_v4() NOT NULL,
                 created_at timestamptz DEFAULT now() NULL,
                 access_token text NULL,
-                expires_in numeric NULL,
+                expires_at numeric NULL,
                 user_id uuid NULL,
                 CONSTRAINT "PK_7e416cf6172bc5aec04244f6459" PRIMARY KEY (id)
             ) `

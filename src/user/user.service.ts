@@ -38,7 +38,12 @@ export class UserService {
     user.name = updateUserDto.name;
     user.email = updateUserDto.email;
     user.password = updateUserDto.password;
+    user.access_token = updateUserDto.access_token;
     return this.userRepository.update(id, user)
+  }
+
+  getUserEmail(email: any): Promise<User> {
+    return this.userRepository.findOneBy( {email} );
   }
 
 }

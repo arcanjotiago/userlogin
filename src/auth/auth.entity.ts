@@ -14,12 +14,11 @@ export class Auth {
   access_token: string;
   
   @Column('text')
-  expires_in: number;
+  expires_at: number;
 
   @Column('text')
-  role: string;
-
-  @ManyToOne(() => User, (user_id: User) => user_id.access_token)
-  user_id: User;
- 
+  user_id: string;
+  // @ManyToOne(() => User, (user: User) => user.access_token)
+  // user_id: User;
+  
 }

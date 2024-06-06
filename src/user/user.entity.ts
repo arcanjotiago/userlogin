@@ -19,7 +19,8 @@ export class User {
   @Column('text')
   password: string;
 
+  @Column('text')
   @OneToMany(() => Auth, (auth: Auth) => auth.user_id)
   access_token: Auth[];
- 
+
 }
