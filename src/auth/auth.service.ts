@@ -34,7 +34,7 @@ export class AuthService {
     
       const auth: Auth = new Auth();
       auth.access_token = genTokenLogin;
-      auth.expires_at = (Date.now());
+      auth.validity = (Date.now());
       auth.user_id = userDatabase.id;
       this.authRepository.save(auth);
 

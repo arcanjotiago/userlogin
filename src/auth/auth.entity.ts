@@ -14,7 +14,7 @@ export class Auth {
   access_token: string;
   
   @Column('text')
-  expires_at: number;
+  validity: number;
 
   @Column('text')
   user_id: string;

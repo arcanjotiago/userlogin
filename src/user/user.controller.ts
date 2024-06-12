@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Post, Put } from '@nestjs/common';
+import { Controller, Get, Header, Headers, Patch, Post, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Body } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -12,12 +12,12 @@ export class UserController {
   constructor(private readonly userService:UserService) {}
 
   @Get('/')
-  getUser():any {
-    return this.userService.getUser();
+  getUser(@Headers('tokenAuthorization') tokenAuthorization:any):any {
+    return this.userService.getUser(tokenAuthorization);
   }
   
   @Get(':id')
-  getUserId(@Param('id') id: any) {
+  getUserId(@Param('id') id:any) {
     return this.userService.getUserId(id);
   }
 

@@ -22,11 +22,16 @@ export class  InitialMigration implements MigrationInterface {
                 id uuid DEFAULT uuid_generate_v4() NOT NULL,
                 created_at timestamptz DEFAULT now() NULL,
                 access_token text NULL,
-                expires_at numeric NULL,
+                validity numeric NULL,
                 user_id uuid NULL,
                 CONSTRAINT "PK_7e416cf6172bc5aec04244f6459" PRIMARY KEY (id)
             ) `
         );
+
+        await queryRunner.query(
+            `CREATE INDEX access_token ON auth (access_token)`
+        );
+
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
