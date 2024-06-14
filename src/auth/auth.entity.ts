@@ -1,6 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, Timestamp, ManyToOne } from 'typeorm';
 import { UUID } from 'typeorm/driver/mongodb/bson.typings';
-import { User } from '../user/user.entity';
 
 @Entity()
 export class Auth {
@@ -17,8 +16,5 @@ export class Auth {
   validity: number;
 
   @Column('text')
-  user_id: string;
-  // @ManyToOne(() => User, (user: User) => user.access_token)
-  // user_id: User;
-  
+  user_id: string; 
 }

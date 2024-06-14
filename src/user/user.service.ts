@@ -4,7 +4,6 @@ import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthService } from 'src/auth/auth.service';
-
 @Injectable()
 export class UserService {
   constructor(
@@ -21,7 +20,6 @@ export class UserService {
     }
     return tokenValidate;
   }
-  
 
   async getUserId(access_token:any, id: any): Promise<User> {
     const tokenValidate:any = await this.authService.checkAccessToken(access_token);
@@ -30,12 +28,34 @@ export class UserService {
       return this.userRepository.findOneBy({ id });
     }
     return tokenValidate;
-  }
+    }
 
-  async createUser(access_token:any, createUserDto: CreateUserDto): Promise<User> {
-    const tokenValidate:any = await this.authService.checkAccessToken(access_token);
+  async getUserEmail(email: any): Promise<any> {
+    const checkEmailDuplicate = await this.userRepository.findOneBy( {email} );
+
+    if(checkEmailDuplicate != null){
+      if (checkEmailDuplicate.email == email){
+        return {
+          "message": "The email informed has used!, please! send the new email on requisition!",
+          "status": 401
+        }
+      }
+    }
+    return {
+      "message": "The send email not exist in database!",
+      "status": 200
+    }   
+  }
     
-    if (tokenValidate.status == 200){
+    async createUser(access_token:any, createUserDto: CreateUserDto): Promise<User> {
+      const tokenValidate:any = await this.authService.checkAccessToken(access_token);
+      
+      if (tokenValidate.status == 200){
+      const validateMail = await this.getUserEmail(createUserDto.email);
+      if(validateMail.status == 401){
+        return validateMail;
+      };
+      
       const user: User = new User();
       user.name = createUserDto.name;
       user.email = createUserDto.email;
@@ -68,8 +88,5 @@ export class UserService {
     return tokenValidate; 
   }
 
-  // getUserEmail(email: any): Promise<User> {
-  //   return this.userRepository.findOneBy( {email} );
-  // }
 
 }

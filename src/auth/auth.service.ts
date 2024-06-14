@@ -14,7 +14,6 @@ export class AuthService {
     private userRepository: Repository<User>,
   ) {}
 
-  // @Put(':email')
   async postAuth(authDto: AuthDto): Promise<any> {
     let emailDatabase;
     let passwordDatabase;
@@ -55,7 +54,6 @@ export class AuthService {
   }
 
   async checkAccessToken(access_token:any): Promise<any>{  
-    let tokenValidation = 0;
     
     if(typeof(access_token) != "string"){
       return {
@@ -65,21 +63,25 @@ export class AuthService {
     }
 
     const findTokenDatabase:any = await this.authRepository.findOneBy( {access_token} );
-    tokenValidation = findTokenDatabase.validity;
+
+    if(findTokenDatabase != null){
+      const calcTokenValidate = ((Date.now() - findTokenDatabase.validity) / 1000);
       
-    const calcTokenValidate = ((Date.now() - tokenValidation) / 1000);
-    
-    if(calcTokenValidate > 86400){
+      if(calcTokenValidate > 86400){
+        return {
+          "message":"Acess not authorized! Access token expired!",
+          "status":401,
+        }
+      }
       return {
-        "message":"Acess not authorized! Access token expired!",
-        "status":401,
+        "message":"Access granted ",
+        "status":200
       }
     }
-
-    return {
-      "message":"Access granted ",
-      "status":200
-    }
     
+    return {
+      "message":"Acess not authorized! Token not find!",
+      "status":401,
+    }
   }
 }
