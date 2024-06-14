@@ -53,4 +53,33 @@ export class AuthService {
     
     return {"message": "Your credentials is incorect. Please try again!", "statusCode": 404}
   }
+
+  async checkAccessToken(access_token:any): Promise<any>{  
+    let tokenValidation = 0;
+    
+    if(typeof(access_token) != "string"){
+      return {
+        "message":"Acess not authorized! please, send a valid access token in header requisition!",
+        "status":401
+      }
+    }
+
+    const findTokenDatabase:any = await this.authRepository.findOneBy( {access_token} );
+    tokenValidation = findTokenDatabase.validity;
+      
+    const calcTokenValidate = ((Date.now() - tokenValidation) / 1000);
+    
+    if(calcTokenValidate > 86400){
+      return {
+        "message":"Acess not authorized! Access token expired!",
+        "status":401,
+      }
+    }
+
+    return {
+      "message":"Access granted ",
+      "status":200
+    }
+    
+  }
 }

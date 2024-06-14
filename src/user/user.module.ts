@@ -3,11 +3,11 @@ import { DatabaseModule } from '../database/database.module';
 import { userProviders } from './user.providers';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { AuthModule } from 'src/auth/auth.module';
 import { authProviders } from 'src/auth/auth.providers';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, AuthModule],
   controllers:[UserController],
   providers: [...userProviders, UserService, ...authProviders],
   exports:[UserService]

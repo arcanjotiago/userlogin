@@ -6,34 +6,35 @@ import { Delete } from '@nestjs/common';
 import { Param } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 
-
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService:UserService) {}
+  constructor(
+    private readonly userService:UserService
+  ) {}
 
   @Get('/')
   getUser(@Headers('tokenAuthorization') tokenAuthorization:any):any {
-    return this.userService.getUser(tokenAuthorization);
+    return this.userService.getUser(tokenAuthorization);  
   }
   
   @Get(':id')
-  getUserId(@Param('id') id:any) {
-    return this.userService.getUserId(id);
+  getUserId(@Headers('tokenAuthorization') tokenAuthorization:any, @Param('id') id:any) {
+    return this.userService.getUserId(tokenAuthorization, id);
   }
 
   @Post('create')
-  createUser(@Body() createUserDto: CreateUserDto) {
-    return this.userService.createUser(createUserDto);
+  createUser(@Headers('tokenAuthorization') tokenAuthorization:any, @Body() createUserDto: CreateUserDto) {
+    return this.userService.createUser(tokenAuthorization, createUserDto);
   }
 
   @Delete(':id')
-  deleteUser(@Param('id') id: string) {
-    return this.userService.deleteUser(id);
+  deleteUser(@Headers('tokenAuthorization') tokenAuthorization:any, @Param('id') id: string) {
+    return this.userService.deleteUser(tokenAuthorization, id);
   }
 
   @Put(':id')
-  updateUser(@Param('id') id: any, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.updateUser(id, updateUserDto);
+  updateUser(@Headers('tokenAuthorization') tokenAuthorization:any, @Param('id') id: any, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.updateUser(tokenAuthorization, id, updateUserDto);
   }
 
 }
