@@ -4,14 +4,14 @@ This project was developed using NestJS. Here we have a user login module with f
 -For each endpint, except the login, the user shoud be send the valid access token.
 
 ## Endpoints
-**method-description / endpoint
--GET Status: /status
--POST Create user: /user/create
--POST Login: /auth
--GET All users: /user
--GET User by id: /user/:id
--DEL Delete User: /user/:id
--PUT Update User: /user/:id
+### method-description / endpoint  
+-GET Status: /status  
+-POST Create user: /user/create  
+-POST Login: /auth  
+-GET All users: /user  
+-GET User by id: /user/:id  
+-DEL Delete User: /user/:id  
+-PUT Update User: /user/:id  
 
 
 ## Installation
