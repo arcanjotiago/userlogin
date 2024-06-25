@@ -23,8 +23,8 @@ export class UserController {
   }
 
   @Post('create')
-  createUser(@Headers('tokenAuthorization') tokenAuthorization:any, @Body() createUserDto: CreateUserDto) {
-    return this.userService.createUser(tokenAuthorization, createUserDto);
+  createUser(@Body() createUserDto: CreateUserDto) {
+    return this.userService.createUser(createUserDto);
   }
 
   @Delete(':id')
