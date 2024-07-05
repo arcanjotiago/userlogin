@@ -19,6 +19,10 @@ This project was developed using NestJS. Here we have a user login module with f
 $ npm install
 ```
 
+## Building migration
+- After run initial migration, executing in your database that following comand for create a index:
+    - CREATE INDEX access_token ON "auth" (access_token) 
+
 ## Running the app
 ```terminal
 # development
