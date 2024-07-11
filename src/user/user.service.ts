@@ -60,7 +60,6 @@ export class UserService {
       user.password = createUserDto.password;
       return this.userRepository.save(user);
 
-    // return tokenValidate;
   }
 
   async deleteUser(access_token:any, id: string): Promise<{ affected?: number }> {
