@@ -7,7 +7,7 @@ export class  InitialMigration implements MigrationInterface {
         await queryRunner.query(
             `
             CREATE TABLE "user"(
-                    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+                    id uuid DEFAULT gen_random_uuid() NOT NULL,
                     created_at timestamptz DEFAULT now() NULL,
                     "name" text NOT NULL,
                     email text NOT NULL,
@@ -19,7 +19,7 @@ export class  InitialMigration implements MigrationInterface {
         
         await queryRunner.query(
             `CREATE TABLE "auth"(
-                id uuid DEFAULT uuid_generate_v4() NOT NULL,
+                id uuid DEFAULT gen_random_uuid() NOT NULL,
                 created_at timestamptz DEFAULT now() NULL,
                 access_token text NULL,
                 validity numeric NULL,
