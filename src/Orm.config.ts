@@ -1,8 +1,8 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
-import * as dotenv from 'dotenv';
 import { User } from './user/user.entity';
 import { Auth } from './auth/auth.entity';
 import { InitialMigration } from './database/migrations/initial.migration';
+import * as dotenv from 'dotenv';
 dotenv.config();
 
 export function getConfig(){

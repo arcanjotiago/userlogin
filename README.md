@@ -1,36 +1,33 @@
-## Description
+# Description
 This project was developed using NestJS. Here we have a user login module with follow description:
--The user has specific endpoint to do login with email and password. After login, the user receives a valid token for 24hrs.
--For each endpint, except the login, the user shoud be send the valid access token.
 
-## Endpoints
-### method-description / endpoint  
--GET Status: /status  
--POST Create user: /user/create  
--POST Login: /auth  
--GET All users: /user  
--GET User by id: /user/:id  
--DEL Delete User: /user/:id  
--PUT Update User: /user/:id  
+- To access the endpoints the module, the users shold be perform a login `(Except to route status)`.
+- The user has specific endpoint to perform login with email and password. After login, the user receives a valid token for `24hrs`.
+- For each endpoint, except the login, the user shoud be send the valid access token.
+- Only user with role `administrator` can create, delete, update and list users.
 
+# Endpoints
+- `GET`   /status 
+- `POST`  /user/create  
+- `POST`  /auth  
+- `GET`   /user  
+- `GET`   /user/:id  
+- `DEL`   /user/:id  
+- `PUT`   /user/:id  
 
-## Installation
-```terminal
-$ npm install
+# Installation
+```
+npm install
+```
+> After installation, configure your `.env file` as shown in the example `.env.EXAMPLE`
+
+# Running the app
+`development`
+```
+npm run start
 ```
 
-## Building migration
-- After run initial migration, executing in your database that following comand for create a index:
-    - CREATE INDEX access_token ON "auth" (access_token) 
-
-## Running the app
-```terminal
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+`watch mode`
+```
+npm run start:dev
 ```

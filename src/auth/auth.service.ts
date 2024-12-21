@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable, Put } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable} from '@nestjs/common';
 import {v4 as uuidv4} from 'uuid';
 import { AuthDto } from './dto/auth.dto';
 import { Auth } from './auth.entity';
@@ -44,13 +44,16 @@ export class AuthService {
 
       return {
         "message":"Login sucessfull!",
-        "statusCode": 201,
+        "status": 201,
         "access_token":user.access_token,
         "expires_at":"24 Hrs"
       }
     }
     
-    return {"message": "Your credentials is incorect. Please try again!", "statusCode": 401}
+    return {
+      "message": "Your credentials is incorect. Please try again!", 
+      "status": 401
+    }
   }
 
   async checkAccessToken(access_token:any): Promise<any>{  
@@ -75,6 +78,7 @@ export class AuthService {
       }
       return {
         "message":"Access granted ",
+        "user_id": findTokenDatabase.user_id,
         "status":200
       }
     }
