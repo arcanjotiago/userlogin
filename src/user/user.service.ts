@@ -158,7 +158,16 @@ export class UserService {
           "message": `Access denied. You must be an administrator to access this endpoint`,
           "status": 401
         }
-      }
+      };
+
+      if (updateUserDto.role != 'administrator' && updateUserDto.role != 'user'){
+        responseReq.status(400);
+        return {
+          "message": `Error! The type role must be filled with (administrator) or (user)`,
+          "status": 400
+        }
+      };
+
       const user: User = new User();
       user.name = updateUserDto.name;
       user.email = updateUserDto.email;
