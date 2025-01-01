@@ -79,7 +79,6 @@ export class UserService {
 
     if (tokenValidate.status == 200){
       const checkRoleUser:any = await this.getUserRole(access_token, tokenValidate.user_id);
-      console.log(checkRoleUser.role)
 
       if(checkRoleUser.role != 'administrator'){
         responseReq.status(401);
@@ -92,6 +91,14 @@ export class UserService {
       const validateMail = await this.getUserEmail(createUserDto.email);
       if(validateMail.status == 401){
         return validateMail;
+      };
+
+      if (createUserDto.role != 'administrator' && createUserDto.role != 'user'){
+        responseReq.status(400);
+        return {
+          "message": `Error! The type role must be filled with (administrator) or (user)`,
+          "status": 400
+        }
       };
       
       const user: User = new User();

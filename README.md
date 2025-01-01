@@ -8,12 +8,49 @@ This project was developed using NestJS. Here we have a user login module with f
 
 # Endpoints
 - `GET`   /status 
-- `POST`  /user/create  
 - `POST`  /auth  
 - `GET`   /user  
 - `GET`   /user/:id  
+- `POST`  /user/create  
 - `DEL`   /user/:id  
-- `PUT`   /user/:id  
+- `PUT`   /user/:id 
+
+## Requisition examples
+`POST` /auth
+```
+curl --location 'http://localhost:3000/auth' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "user01@example.com",
+    "password": "0000000"
+}'
+```
+
+`POST` /user/create  
+```
+curl --location 'http://localhost:3000/user/create' \
+--header 'tokenAuthorization: xxxxxxxxxxxxxxxxxxxxxx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "user01",
+    "email": "user01@example.com",
+    "password": "0000000",
+    "role":"administrator"
+}'
+```
+
+`PUT` /user/:id 
+```
+curl --location --request PUT 'http://localhost:3000/user/null' \
+--header 'tokenAuthorization: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "user01",
+    "email": "user01@example.com",
+    "password": "0000000",
+    "role":"administrator"
+}'
+```
 
 # Installation
 ```
